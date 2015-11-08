@@ -27,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-            "futuretek\\gii\\generators": ""
+            "futuretek\\gii\\generators\\": ""
         }
     }
 }
