@@ -1,0 +1,33 @@
+{
+    "name": "futuretek/yii2-gii-generators",
+    "description": "Generators and templates for yii2-gii",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension", "gii"],
+    "license": "proprietary",
+    "homepage": "http://www.futuretek.cz/",
+    "authors": [
+        {
+            "name": "Petr Leo Compel",
+            "email": "petr.compel@futuretek.cz"
+        }
+    ],
+    "support": {
+        "issues": "https://jira.futuretek.cz/browse/YII",
+        "wiki": "https://doc.futuretek.cz/display/YII",
+        "source": "https://git.futuretek.cz/projects/YII"
+    },
+    "repositories": [
+        {
+            "url": "http://composer.futuretek.cz",
+            "type": "composer"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "futuretek\\gii\\generators": ""
+        }
+    }
+}
