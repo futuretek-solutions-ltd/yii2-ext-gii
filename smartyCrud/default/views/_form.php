@@ -16,8 +16,20 @@ if (empty($safeAttributes)) {
 ?>
 {use class="yii\helpers\Html"}
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-form">
-    {use class='yii\widgets\ActiveForm' type='block'}
-    {ActiveForm assign='form'}
+    {use class='yii\bootstrap\ActiveForm' type='block'}
+    {ActiveForm assign='form'
+        'layout' = 'horizontal'
+        'fieldConfig' = [
+            'template' => "{label}\n{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
+            'horizontalCssClasses' => [
+                'label' => 'col-sm-4',
+                'offset' => 'col-sm-offset-4',
+                'wrapper' => 'col-sm-8',
+                'error' => '',
+                'hint' => ''
+            ]
+        ]
+    }
     <?php foreach ($generator->getColumnNames() as $attribute) {
         if (in_array($attribute, $safeAttributes, false)) {
             echo '   {' . $generator->generateActiveField($attribute) . "}\n\n";
