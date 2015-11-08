@@ -25,7 +25,7 @@ $nameAttribute = $generator->getNameAttribute();
 
 <?php if ($generator->indexWidgetType === 'grid'): ?>
     {use class='yii\grid\GridView' type='function'}
-    {GridView dataProvider=$provider
+    {GridView dataProvider=$dataProvider
     <?= !empty($generator->searchModelClass) ? 'filterModel=$searchModel columns=[': 'column=['; ?>
         ['class' => 'yii\grid\SerialColumn'],
 <?php
