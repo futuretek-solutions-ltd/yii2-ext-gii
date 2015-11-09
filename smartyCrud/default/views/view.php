@@ -23,8 +23,8 @@ $urlParams = $generator->generateUrlParams();
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => <?= $generator->generateString('Are you sure you want to delete this item?') ?>,
-                'method' => 'post',
-            ],
+                'method' => 'post'
+            ]
         ])}
     </p>
     {use class="yii\widgets\DetailView" type='function'}
@@ -32,14 +32,25 @@ $urlParams = $generator->generateUrlParams();
         model=$model
         attributes=[
 <?php
+$first = true;
 if (($tableSchema = $generator->getTableSchema()) === false) {
     foreach ($generator->getColumnNames() as $name) {
-        echo "            '" . $name . "',\n";
+        if($first) {
+            $first = false;
+        } else {
+            echo ",\n";
+        }
+        echo "            '" . $name;
     }
 } else {
     foreach ($generator->getTableSchema()->columns as $column) {
+        if($first) {
+            $first = false;
+        } else {
+            echo ",\n";
+        }
         $format = $generator->generateColumnFormat($column);
-        echo "            '" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
+        echo "            '" . $column->name . ($format === 'text' ? '' : ':' . $format) . '\'';
     }
 }
 ?>

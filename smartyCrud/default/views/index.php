@@ -17,45 +17,76 @@ $nameAttribute = $generator->getNameAttribute();
 
     <h1>{Html::encode($title)}</h1>
 <?php if(!empty($generator->searchModelClass)): ?>
-<?= ($generator->indexWidgetType === 'grid' ? '' : '{include "_form.tpl"}') ?>
+<?= ($generator->indexWidgetType === 'grid' || $generator->indexWidgetType === 'krajeegrid' ? '' : '{include "_form.tpl"}') ?>
 <?php endif; ?>
 
+    <?php if($generator->indexWidgetType !=='krajeegrid')  { ?>
     <p>
         {Html::a(<?= $generator->generateString('Create ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>, ['create'], ['class' => 'btn btn-success'])}
     </p>
+    <?php } ?>
 
-<?php if ($generator->indexWidgetType === 'grid'): ?>
+<?php if ($generator->indexWidgetType === 'grid') { ?>
     {use class='yii\grid\GridView' type='function'}
     {GridView dataProvider=$dataProvider
     <?= !empty($generator->searchModelClass) ? 'filterModel=$searchModel columns=[': 'column=['; ?>
         ['class' => 'yii\grid\SerialColumn'],
 <?php
-$count = 0;
-if (($tableSchema = $generator->getTableSchema()) === false) {
-    foreach ($generator->getColumnNames() as $name) {
-        if (++$count < 6) {
-            echo "            '" . $name . "',\n";
-        } else {
-            //echo "            // '" . $name . "',\n";
+    $count = 0;
+    if (($tableSchema = $generator->getTableSchema()) === false) {
+        foreach ($generator->getColumnNames() as $name) {
+            if (++$count < 6) {
+                echo "            '" . $name . "',\n";
+            }
+        }
+    } else {
+        foreach ($tableSchema->columns as $column) {
+            $format = $generator->generateColumnFormat($column);
+            if (++$count < 6) {
+                echo "            '" . $column->name . ($format === 'text' ? '' : ':' . $format) . "',\n";
+            }
         }
     }
-} else {
-    foreach ($tableSchema->columns as $column) {
-        $format = $generator->generateColumnFormat($column);
-        if (++$count < 6) {
-            echo "            '" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
-        } else {
-            //echo "            // '" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
-        }
-    }
-}
 ?>
-
         ['class' => 'yii\grid\ActionColumn']
     ]}
-<?php else: ?>
+<?php } else if ($generator->indexWidgetType === 'krajeegrid') { ?>
+    {use class='kartik\grid\GridView' type='function'}
+    {GridView dataProvider=$dataProvider
+    <?= !empty($generator->searchModelClass) ? 'filterModel=$searchModel': ''; ?>
+    toolbar=[
+        [
+            'content'=> Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['class'=>'btn btn-success'])
+        ],
+        '{export}',
+        '{toggleData}'
+    ]
+    layout = '{summary}<div class="row"><div class="col-md-4 pull-right"><div class="pull-right">{toolbar}</div></div></div>{items}{pager}'
+    pjax=true
+    columns=[
+        ['class' => 'kartik\grid\SerialColumn'],
+    <?php
+    $count = 0;
+    if (($tableSchema = $generator->getTableSchema()) === false) {
+        foreach ($generator->getColumnNames() as $name) {
+            if (++$count < 6) {
+                echo "            '" . $name . "',\n";
+            }
+        }
+    } else {
+        foreach ($tableSchema->columns as $column) {
+            $format = $generator->generateColumnFormat($column);
+            if (++$count < 6) {
+                echo "            '" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
+            }
+        }
+    }
+    ?>
+        ['class' => 'kartik\grid\ActionColumn']
+    ]}
+<?php } else { ?>
     {use class='@yii\widgets\ListView' type='function'}
     {ListView dataProvider=$dataProvider itemOptions=['class' => 'item']}
-<?php endif; ?>
+<?php } ?>
 
 </div>

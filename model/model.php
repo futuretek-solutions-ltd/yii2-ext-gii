@@ -67,7 +67,7 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
     public function scenarios()
     {
         return [
-            'default' => [<?php foreach ($tableSchema->columns as $column):?><?= "'{$column->name}'," ?><?php endforeach; ?>]
+            'default' => [<?php foreach ($tableSchema->columns as $column):?><?php if($column->name === 'id' || $column->name === 'created_at' || $column->name === 'updated_at' ) continue; ?><?= "'{$column->name}'," ?><?php endforeach; ?>]
         ];
     }
 

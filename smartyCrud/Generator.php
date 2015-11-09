@@ -72,7 +72,7 @@ class Generator extends \yii\gii\Generator
             [['controllerClass'], 'match', 'pattern' => '/Controller$/', 'message' => 'Controller class name must be suffixed with "Controller".'],
             [['controllerClass'], 'match', 'pattern' => '/(^|\\\\)[A-Z][^\\\\]+Controller$/', 'message' => 'Controller class name must start with an uppercase letter.'],
             [['controllerClass', 'searchModelClass'], 'validateNewClass'],
-            [['indexWidgetType'], 'in', 'range' => ['grid', 'list']],
+            [['indexWidgetType'], 'in', 'range' => ['grid', 'list', 'krajeegrid']],
             [['modelClass'], 'validateModelClass'],
             [['enableI18N'], 'boolean'],
             [['messageCategory'], 'validateMessageCategory', 'skipOnEmpty' => false],
@@ -232,7 +232,9 @@ class Generator extends \yii\gii\Generator
             }
         }
         $column = $tableSchema->columns[$attribute];
-        if ($column->phpType === 'boolean' || ($column->dbType === 'tinyint' && $column->size === 1 && ($column->defaultValue === 1 || $column->defaultValue === 0))) {
+        if ($column->name === 'id') {
+            return '';
+        } else if ($column->phpType === 'boolean' || ($column->dbType === 'tinyint' && $column->size === 1 && ($column->defaultValue === 1 || $column->defaultValue === 0))) {
             return "\$form->field(\$model, '$attribute')->checkbox()";
         } elseif ($column->type === 'text') {
             return "\$form->field(\$model, '$attribute')->textarea(['rows' => 6])";
