@@ -12,6 +12,7 @@ $urlParams = $generator->generateUrlParams();
 
 {assign var=title value=$model-><?= $generator->getNameAttribute() ?>}
 {set title=$title}
+{set layout="main.tpl"}
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view">
     {use class="yii\helpers\Html"}
     <h1>{Html::encode($title)}</h1>

@@ -9,6 +9,7 @@ $urlParams = $generator->generateUrlParams();
 ?>
 {assign var=title value=<?= $generator->generateString('Update {modelClass}: ', ['modelClass' => Inflector::camel2words(StringHelper::basename($generator->modelClass))]) ?> . ' ' . $model-><?= $generator->getNameAttribute() ?>}
 {set title=$title}
+{set layout="main.tpl"}
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-update">
     <h1>{Html::encode($title)}</h1>
     {include "_form.tpl"}

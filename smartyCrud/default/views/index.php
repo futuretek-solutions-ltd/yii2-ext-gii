@@ -12,6 +12,7 @@ $nameAttribute = $generator->getNameAttribute();
 {use class="yii\helpers\Html"}
 {assign var=title value=<?= $generator->generateString(Inflector::pluralize(Inflector::camel2words(StringHelper::basename($generator->modelClass)))) ?>}
 {set title=$title}
+{set layout="main.tpl"}
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-index">
 
     <h1>{Html::encode($title)}</h1>

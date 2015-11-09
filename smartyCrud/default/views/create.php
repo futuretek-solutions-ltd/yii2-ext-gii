@@ -9,6 +9,7 @@ use yii\helpers\StringHelper;
 {use class="yii\helpers\Html"}
 {assign var=title value=<?= $generator->generateString('Create ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>}
 {set title=$title}
+{set layout="main.tpl"}
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-create">
     <h1>{Html::encode($title)}</h1>
     {include "_form.tpl"}
