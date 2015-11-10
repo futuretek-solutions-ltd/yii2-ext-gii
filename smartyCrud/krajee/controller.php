@@ -4,6 +4,7 @@
  */
 
 use yii\db\ActiveRecordInterface;
+use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 
 
@@ -38,13 +39,17 @@ use yii\data\ActiveDataProvider;
 <?php endif; ?>
 use <?= ltrim($generator->baseControllerClass, '\\') ?>;
 use yii\web\NotFoundHttpException;
+use yii\helpers\Html;
 use yii\filters\VerbFilter;
+use kartik\grid\GridView;
 
 /**
  * <?= $controllerClass ?> implements the CRUD actions for <?= $modelClass ?> model.
  */
 class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->baseControllerClass) . "\n" ?>
 {
+    public $defaultAction = 'index';
+
     /**
      * @inheritdoc
      */
@@ -63,16 +68,82 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
     /**
      * Lists all <?= $modelClass ?> models.
      * @return mixed
+     * @throws \Exception
      */
     public function actionIndex()
     {
 <?php if (!empty($generator->searchModelClass)): ?>
-        $searchModel = new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $this->assign([
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        $searchModel = new SchoolTypeSearch();
+        $this->assign('grid', GridView::widget([
+        'dataProvider' => $searchModel->search(Yii::$app->request->queryParams),
+        'filterModel' => new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>(),
+        'responsive' => true,
+        'toolbar' => [
+            [
+                'content' => Html::a('<i class="glyphicon glyphicon-plus"></i>' . Yii::t('<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>', 'New'), //todo: Edit new button name
+                    ['create'],
+                    ['class' => 'btn btn-success', 'title' => Yii::t('<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>', 'New')] //todo: Edit new button name
+                )
+            ],
+            '{export}',
+        ],
+        'layout' => '<div class="row"><div class="col-md-4 pull-right"><div class="pull-right">{toolbar}</div></div></div>{items}{summary}{pager}',
+        'pjax' => true,
+        'columns' => [
+        <?php
+        $count = 0;
+        if (($tableSchema = $generator->getTableSchema()) === false) {
+            foreach ($generator->getColumnNames() as $name) {
+                if ($name === 'created_at' || $name === 'updated_at') continue;
+                if ($name === 'id') { ?>
+            [
+                'class' => 'kartik\grid\DataColumn',
+                'attribute' => 'id',
+                'width' => '120px',
+            ],
+                <?php
+                } else
+                if (++$count < 6) {
+                    echo "            '" . $name . "',\n";
+                }
+            }
+        } else {
+            foreach ($tableSchema->columns as $column) {
+                $format = $generator->generateColumnFormat($column);
+                if ($column->name === 'created_at' || $column->name === 'updated_at') continue;
+                if ($column->name === 'id') { ?>
+            [
+                'class' => 'kartik\grid\DataColumn',
+                'attribute' => 'id',
+                'width' => '120px',
+            ],
+                <?php
+                } else
+                if (++$count < 6) {
+                    echo "            '" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
+                }
+            }
+        }
+        ?>
+            [
+                'class' => 'kartik\grid\ActionColumn',
+                'template' => '{update} &nbsp; {delete}',
+            ],
+        ],
+        'export' => [
+            'label' => Yii::t('<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>', 'Export'),
+            'fontAwesome' => true,
+        ],
+        'exportConfig' => [
+            GridView::EXCEL => [
+                'filename' => Yii::t('<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>', '<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>'),
+            ],
+            GridView::PDF => [
+                'filename' => Yii::t('<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>', '<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>'),
+            ],
+        ],
+        ]));
+
         return $this->renderSmarty('index');
 <?php else: ?>
         $dataProvider = new ActiveDataProvider([
@@ -90,6 +161,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
      * Displays a single <?= $modelClass ?> model.
      * <?= implode("\n     * ", $actionParamComments) . "\n" ?>
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionView(<?= $actionParams ?>)
     {
@@ -108,6 +180,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
     {
         $model = new <?= $modelClass ?>();
 
+        /** @noinspection NotOptimalIfConditionsInspection */
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', <?= $urlParams ?>]);
         } else {
@@ -123,11 +196,13 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
      * If update is successful, the browser will be redirected to the 'view' page.
      * <?= implode("\n     * ", $actionParamComments) . "\n" ?>
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionUpdate(<?= $actionParams ?>)
     {
         $model = $this->findModel(<?= $actionParams ?>);
 
+        /** @noinspection NotOptimalIfConditionsInspection */
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', <?= $urlParams ?>]);
         } else {
@@ -143,6 +218,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * <?= implode("\n     * ", $actionParamComments) . "\n" ?>
      * @return mixed
+     * @throws \Exception
      */
     public function actionDelete(<?= $actionParams ?>)
     {

@@ -51,7 +51,8 @@
                             "smartyCrud": {
                                 "class": "futuretek\\gii\\generators\\smartyCrud\\Generator",
                                 "templates": {
-                                    "default": "@app/vendor/futuretek/yii2-gii-generators/smartyCrud/default"
+                                    "krajee-grid": "@app/vendor/futuretek/yii2-gii-generators/smartyCrud/krajee",
+                                    "yii-grid": "@app/vendor/futuretek/yii2-gii-generators/smartyCrud/default"
                                 }
                             },
                             "ftsCrud": {
