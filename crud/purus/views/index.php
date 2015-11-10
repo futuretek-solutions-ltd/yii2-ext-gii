@@ -24,7 +24,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-index">
 
-    <h1><?= "<?= " ?>Html::encode($this->title) ?></h1>
 <?php if(!empty($generator->searchModelClass)): ?>
 <?= "    <?php " . ($generator->indexWidgetType === 'grid' || $generator->indexWidgetType === 'krajeegrid' ? '// ' : '') ?>echo $this->render('_search', ['model' => $searchModel]); ?>
 <?php endif; ?>
@@ -77,6 +76,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
             '{export}',
             '{toggleData}'
         ],
+        'export'=>false,
         'layout' => '{summary}<div class="row"><div class="col-md-4 pull-right"><div class="pull-right">{toolbar}</div></div></div>{items}{pager}',
         'pjax'=>true,
         'columns'=>[

@@ -238,7 +238,7 @@ class Generator extends \yii\gii\Generator
         } elseif ($column->type === 'text') {
             return "\$form->field(\$model, '$attribute')->textarea(['rows' => 6])";
         } elseif (substr($column->name, -3) === '_id') {
-            return "\$form->field(\$model, '$attribute')->dropDownList(yii\\helpers\\ArrayHelper::map(app\\models\\db\\" . Tools::toCamelCase(substr($column->name, 0, -3), true) . '::find()->select(["id","name"])->asArray()->all(), \'id\',\'name\')' . ($column->allowNull ? ',[\'prompt\' => \'-\'] )' : ' )');
+            return "\$form->field(\$model, '$attribute')->dropDownList(yii\\helpers\\ArrayHelper::map(app\\models\\db\\" . Tools::toCamelCase(substr($column->name, 0, -3), true) . '::find()->select([\'id\',\'name\'])->asArray()->all(), \'id\',\'name\')' . ($column->allowNull ? ',[\'prompt\' => \'-\'] )' : ' )');
         } else {
             if (preg_match('/^(password|pass|passwd|passcode)$/i', $column->name)) {
                 $input = 'passwordInput';
