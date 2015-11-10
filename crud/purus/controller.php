@@ -12,6 +12,7 @@ use yii\helpers\StringHelper;
 
 $controllerClass = StringHelper::basename($generator->controllerClass);
 $modelClass = StringHelper::basename($generator->modelClass);
+$permission = strtolower(substr($modelClass, 0, 1)) . \futuretek\shared\Tools::toUnderscoreCase(substr($modelClass, 1));
 $searchModelClass = StringHelper::basename($generator->searchModelClass);
 if ($modelClass === $searchModelClass) {
     $searchModelAlias = $searchModelClass . 'Search';
@@ -59,6 +60,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
 
     /**
      * Lists all <?= $modelClass ?> models.
+     * @permission <?= $permission ?>Read
      * @return mixed
      */
     public function actionIndex()
@@ -85,6 +87,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
     /**
      * Displays a single <?= $modelClass ?> model.
      * <?= implode("\n     * ", $actionParamComments) . "\n" ?>
+     * @permission <?= $permission ?>Read
      * @return mixed
      */
     public function actionView(<?= $actionParams ?>)
@@ -97,6 +100,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
     /**
      * Creates a new <?= $modelClass ?> model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * @permission <?= $permission ?>Create
      * @return mixed
      */
     public function actionCreate()
@@ -116,6 +120,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
      * Updates an existing <?= $modelClass ?> model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * <?= implode("\n     * ", $actionParamComments) . "\n" ?>
+     * @permission <?= $permission ?>Update
      * @return mixed
      */
     public function actionUpdate(<?= $actionParams ?>)
@@ -135,6 +140,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
      * Deletes an existing <?= $modelClass ?> model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * <?= implode("\n     * ", $actionParamComments) . "\n" ?>
+     * @permission <?= $permission ?>Delete
      * @return mixed
      */
     public function actionDelete(<?= $actionParams ?>)

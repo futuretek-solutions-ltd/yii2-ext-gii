@@ -23,11 +23,46 @@
         }
     ],
     "require": {
-        "yiisoft/yii2": "*"
+        "yiisoft/yii2": "*",
+        "futuretek/yii2-shared": "1.0.*"
     },
     "autoload": {
         "psr-4": {
             "futuretek\\gii\\generators\\": ""
+        },
+        "yii-config": {
+            "web": {
+                "modules": {
+                    "gii": {
+                        "class": "yii\\gii\\Module",
+                        "allowedIPs": [
+                            "127.0.0.1",
+                            "::1"
+                        ],
+                        "generators": {
+                            "smartyCrud": {
+                                "class": "futuretek\\gii\\generators\\smartyCrud\\Generator",
+                                "templates": {
+                                    "default": "@app/vendor/futuretek/yii2-gii-generators/smartyCrud/default"
+                                }
+                            },
+                            "ftsCrud": {
+                                "class": "futuretek\\gii\\generators\\crud\\Generator",
+                                "templates": {
+                                    "default": "@app/vendor/futuretek/yii2-gii-generators/crud/default",
+                                    "purus": "@app/vendor/futuretek/yii2-gii-generators/crud/purus"
+                                }
+                            },
+                            "model": {
+                                "class": "yii\\gii\\generators\\model\\Generator",
+                                "templates": {
+                                    "futuretek": "@app/vendor/futuretek/yii2-gii-generators/model"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
