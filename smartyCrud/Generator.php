@@ -45,7 +45,7 @@ class Generator extends \yii\gii\Generator
      */
     public function getName()
     {
-        return 'FTS CRUD Generator';
+        return 'FTS Smarty CRUD Generator';
     }
 
     /**
@@ -54,7 +54,7 @@ class Generator extends \yii\gii\Generator
     public function getDescription()
     {
         return 'This generator generates a controller and views that implement CRUD (Create, Read, Update, Delete)
-            operations for the specified data model.';
+            operations for the specified data model in Smarty template.';
     }
 
     /**
