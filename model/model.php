@@ -4,7 +4,7 @@
  */
 
 /* @var $this yii\web\View */
-/* @var $generator yii\gii\generators\model\Generator */
+/* @var $generator futuretek\gii\generators\model\Generator */
 /* @var $tableName string full table name */
 /* @var $className string class name */
 /* @var $queryClassName string query class name */
@@ -62,12 +62,12 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
     }
 
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function scenarios()
     {
         return [
-            'default' => [<?php foreach ($tableSchema->columns as $column):?><?php if($column->name === 'id' || $column->name === 'created_at' || $column->name === 'updated_at' ) continue; ?><?= "'{$column->name}'," ?><?php endforeach; ?>]
+            'default' => [<?php foreach ($tableSchema->columns as $column):?><?php if ($column->name === 'id' || $column->name === 'created_at' || $column->name === 'updated_at' ) continue; ?><?= "'{$column->name}'," ?><?php endforeach; ?>]
         ];
     }
 
