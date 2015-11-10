@@ -30,6 +30,7 @@ It has automatic configuration. See `composer.json` - `extra:yii-config:web`
 
 
 Or you can use your own configuration like this
+
 ```php
 'modules' => [
     'gii' => [
