@@ -1,4 +1,4 @@
-Futuretek Yii2 Gii Templates
+Futuretek Yii2 Gii generators
 ============================
 Templates and generators for yii2-gii
 
