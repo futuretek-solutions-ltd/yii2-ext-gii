@@ -43,30 +43,32 @@
             "dev-master": "1.0.x-dev"
         },
         "yii-config": {
-            "web": {
-                "modules": {
-                    "gii": {
-                        "class": "yii\\gii\\Module",
-                        "generators": {
-                            "smartyCrud": {
-                                "class": "futuretek\\gii\\generators\\smartyCrud\\Generator",
-                                "templates": {
-                                    "krajee-grid": "@app/vendor/futuretek/yii2-gii-generators/smartyCrud/krajee",
-                                    "yii-grid": "@app/vendor/futuretek/yii2-gii-generators/smartyCrud/default"
-                                }
-                            },
-                            "ftsCrud": {
-                                "class": "futuretek\\gii\\generators\\crud\\Generator",
-                                "templates": {
-                                    "default": "@app/vendor/futuretek/yii2-gii-generators/crud/default",
-                                    "purus": "@app/vendor/futuretek/yii2-gii-generators/crud/purus"
-                                }
-                            },
-                            "model": {
-                                "class": "yii\\gii\\generators\\model\\Generator",
-                                "templates": {
-                                    "futuretek": "@app/vendor/futuretek/yii2-gii-generators/model"
-                                }
+            "modules.dev": {
+                "gii": {
+                    "allowedIPs": [
+                        "127.0.0.1",
+                        "::1"
+                    ],
+                    "class": "yii\\gii\\Module",
+                    "generators": {
+                        "smartyCrud": {
+                            "class": "futuretek\\gii\\generators\\smartyCrud\\Generator",
+                            "templates": {
+                                "krajee-grid": "@app/vendor/futuretek/yii2-gii-generators/smartyCrud/krajee",
+                                "yii-grid": "@app/vendor/futuretek/yii2-gii-generators/smartyCrud/default"
+                            }
+                        },
+                        "ftsCrud": {
+                            "class": "futuretek\\gii\\generators\\crud\\Generator",
+                            "templates": {
+                                "default": "@app/vendor/futuretek/yii2-gii-generators/crud/default",
+                                "purus": "@app/vendor/futuretek/yii2-gii-generators/crud/purus"
+                            }
+                        },
+                        "model": {
+                            "class": "yii\\gii\\generators\\model\\Generator",
+                            "templates": {
+                                "futuretek": "@app/vendor/futuretek/yii2-gii-generators/model"
                             }
                         }
                     }
