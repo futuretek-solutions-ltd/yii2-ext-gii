@@ -1,14 +1,20 @@
 {
     "name": "futuretek/yii2-gii-generators",
     "description": "Generators and templates for yii2-gii",
+    "keywords": [
+        "extension",
+        "gii",
+        "yii"
+    ],
     "type": "yii2-extension",
-    "keywords": ["yii2","extension", "gii"],
     "license": "proprietary",
     "homepage": "http://www.futuretek.cz/",
     "authors": [
         {
             "name": "Petr Leo Compel",
-            "email": "petr.compel@futuretek.cz"
+            "email": "petr.compel@futuretek.cz",
+            "homepage": "http://www.futuretek.cz",
+            "role": "Developer"
         }
     ],
     "support": {
@@ -16,16 +22,17 @@
         "wiki": "https://doc.futuretek.cz/display/YII",
         "source": "https://git.futuretek.cz/projects/YII"
     },
+    "require": {
+        "php": ">=5.5.0",
+        "yiisoft/yii2": "*",
+        "futuretek/yii2-shared": "1.0.*"
+    },
     "repositories": [
         {
             "url": "http://composer.futuretek.cz",
             "type": "composer"
         }
     ],
-    "require": {
-        "yiisoft/yii2": "*",
-        "futuretek/yii2-shared": "1.0.*"
-    },
     "autoload": {
         "psr-4": {
             "futuretek\\gii\\generators\\": ""
@@ -40,10 +47,6 @@
                 "modules": {
                     "gii": {
                         "class": "yii\\gii\\Module",
-                        "allowedIPs": [
-                            "127.0.0.1",
-                            "::1"
-                        ],
                         "generators": {
                             "smartyCrud": {
                                 "class": "futuretek\\gii\\generators\\smartyCrud\\Generator",
