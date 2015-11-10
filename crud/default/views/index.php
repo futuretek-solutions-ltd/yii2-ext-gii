@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= "<?= " ?>Html::encode($this->title) ?></h1>
 <?php if(!empty($generator->searchModelClass)): ?>
-<?= "    <?php " . ($generator->indexWidgetType === 'grid' ? "// " : "") ?>echo $this->render('_search', ['model' => $searchModel]); ?>
+<?= "    <?php " . ($generator->indexWidgetType === 'grid' || $generator->indexWidgetType === 'krajeegrid' ? '// ' : '') ?>echo $this->render('_search', ['model' => $searchModel]); ?>
 <?php endif; ?>
 
     <?php if($generator->indexWidgetType !== 'krajeegrid') {?>
@@ -67,41 +67,43 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
         ],
     ]); ?>
 <?php } else if ($generator->indexWidgetType === 'krajeegrid') { ?>
-    <?= "<?= " ?>kartik\grid\GridView::widget(['dataProvider'=>$dataProvider,
-    <?= !empty($generator->searchModelClass) ? '\'filterModel\'=>$searchModel,\n': ''; ?>
-    'toolbar'=>[
-        [
-            'content' => Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['class'=>'btn btn-success'])
+    <?= "<?= " ?>kartik\grid\GridView::widget([
+        'dataProvider'=>$dataProvider,
+        <?= !empty($generator->searchModelClass) ? '\'filterModel\'=>$searchModel,': ''; ?>
+        'toolbar'=>[
+            [
+                'content' => Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['class'=>'btn btn-success'])
+            ],
+            '{export}',
+            '{toggleData}'
         ],
-        '{export}',
-        '{toggleData}'
-    ]
-    'layout' => '{summary}<div class="row"><div class="col-md-4 pull-right"><div class="pull-right">{toolbar}</div></div></div>{items}{pager}',
-    'pjax'=>true,
-    'columns'=>[
-        ['class' => 'kartik\grid\SerialColumn'],
-    <?php
-    $count = 0;
-    if (($tableSchema = $generator->getTableSchema()) === false) {
-        foreach ($generator->getColumnNames() as $name) {
-            if (++$count < 6) {
-                echo "            '" . $name . "',\n";
-            } else {
-                echo "            //'" . $name . "',\n";
+        'layout' => '{summary}<div class="row"><div class="col-md-4 pull-right"><div class="pull-right">{toolbar}</div></div></div>{items}{pager}',
+        'pjax'=>true,
+        'columns'=>[
+            ['class' => 'kartik\grid\SerialColumn'],
+        <?php
+        $count = 0;
+        if (($tableSchema = $generator->getTableSchema()) === false) {
+            foreach ($generator->getColumnNames() as $name) {
+                if (++$count < 6) {
+                    echo "            '" . $name . "',\n";
+                } else {
+                    echo "            //'" . $name . "',\n";
+                }
+            }
+        } else {
+            foreach ($tableSchema->columns as $column) {
+                $format = $generator->generateColumnFormat($column);
+                if (++$count < 6) {
+                    echo "            '" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
+                } else {
+                    echo "            //'" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
+                }
             }
         }
-    } else {
-        foreach ($tableSchema->columns as $column) {
-            $format = $generator->generateColumnFormat($column);
-            if (++$count < 6) {
-                echo "            '" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
-            } else {
-                echo "            //'" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
-            }
-        }
-    }
-    ?>
-        ['class' => 'kartik\grid\ActionColumn']
+        ?>
+            ['class' => 'kartik\grid\ActionColumn']
+        ]
     ]); ?>
 <?php } else { ?>
     <?= "<?= " ?>ListView::widget([
