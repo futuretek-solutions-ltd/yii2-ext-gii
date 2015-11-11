@@ -15,16 +15,16 @@ if (empty($safeAttributes)) {
 
 ?>
 {use class="yii\helpers\Html"}
-<div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-form">
+<div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-form col-xs-12">
     {use class='yii\bootstrap\ActiveForm' type='block'}
     {ActiveForm assign='form'
     layout= 'horizontal'
     fieldConfig = [
         'template' => '{label}{beginWrapper}{input}{hint}{error}{endWrapper}',
         'horizontalCssClasses' => [
-            'label' => 'col-sm-4',
-            'offset' => 'col-sm-offset-4',
-            'wrapper' => 'col-sm-8',
+            'label' => 'col-sm-3',
+            'offset' => 'col-sm-offset-2',
+            'wrapper' => 'col-sm-10 col-md-6',
             'error' => '',
             'hint' => ''
         ]
@@ -35,11 +35,11 @@ if (empty($safeAttributes)) {
             echo '   {' . $generator->generateActiveField($attribute) . "}\n\n";
         }
     } ?>
-    <div class="form-group">
+    <div class="form-group pull-right">
         {if $model->isNewRecord}
-        {Html::submitButton(<?= $generator->generateString('Create') ?>, ['class' => 'btn btn-success'])}
+        {Html::submitButton(<?= $generator->generateString('Create') ?>, ['class' => 'btn btn-success btn-lg'])}
         {else}
-        {Html::submitButton(<?= $generator->generateString('Update') ?>, ['class' => 'btn btn-primary'])}
+        {Html::submitButton(<?= $generator->generateString('Update') ?>, ['class' => 'btn btn-primary btn-lg'])}
         {/if}
     </div>
     {/ActiveForm}

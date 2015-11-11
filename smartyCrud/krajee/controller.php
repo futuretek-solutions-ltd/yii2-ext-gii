@@ -73,10 +73,10 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
     public function actionIndex()
     {
 <?php if (!empty($generator->searchModelClass)): ?>
-        $searchModel = new SchoolTypeSearch();
+        $searchModel = new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>();
         $this->assign('grid', GridView::widget([
         'dataProvider' => $searchModel->search(Yii::$app->request->queryParams),
-        'filterModel' => new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>(),
+        'filterModel' => $searchModel,
         'responsive' => true,
         'toolbar' => [
             [
@@ -87,7 +87,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
             ],
             '{export}',
         ],
-        'layout' => '<div class="row"><div class="col-md-4 pull-right"><div class="pull-right">{toolbar}</div></div></div>{items}{summary}{pager}',
+    'layout' => '<div class="row"><div class="col-md-4 pull-right text-right m-b-md">{toolbar}</div><div class="col-xs-12">{items}</div><div class="col-md-6">{summary}</div><div class="col-md-6"><div class="pull-right">{pager}</div></div></div>',
         'pjax' => true,
         'columns' => [
         <?php
