@@ -38,6 +38,7 @@ class Generator extends \yii\gii\Generator
     public $baseControllerClass = 'app\classes\Controller';
     public $indexWidgetType = 'grid';
     public $searchModelClass = '';
+    public $layout = 'main.tpl';
 
 
     /**
@@ -76,7 +77,7 @@ class Generator extends \yii\gii\Generator
             [['modelClass'], 'validateModelClass'],
             [['enableI18N'], 'boolean'],
             [['messageCategory'], 'validateMessageCategory', 'skipOnEmpty' => false],
-            ['viewPath', 'safe'],
+            [['viewPath', 'layout'], 'safe'],
         ]);
     }
 

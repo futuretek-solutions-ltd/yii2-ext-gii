@@ -12,12 +12,14 @@ $urlParams = $generator->generateUrlParams();
 
 {assign var=title value=$model-><?= $generator->getNameAttribute() ?>}
 {set title=$title}
-{set layout="main.tpl"}
-<div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view">
-    {use class="yii\helpers\Html"}
-    <h1>{Html::encode($title)}</h1>
+{set layout="<?= $generator->layout ?>"}
+{use class="yii\helpers\Html"}
+<div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view row crud-view">
+    <div class="col-xs-12 col-sm-6">
+        <h1>{Html::encode($title)}</h1>
+    </div>
 
-    <p>
+    <div class="col-xs-12 col-sm-6">
         {Html::a(<?= $generator->generateString('Update') ?>, ['update', <?= $urlParams ?>], ['class' => 'btn btn-primary'])}
         {Html::a(<?= $generator->generateString('Delete') ?>, ['delete', <?= $urlParams ?>], [
             'class' => 'btn btn-danger',
@@ -26,7 +28,8 @@ $urlParams = $generator->generateUrlParams();
                 'method' => 'post'
             ]
         ])}
-    </p>
+    </div>
+    <div class="col-xs-12">
     {use class="yii\widgets\DetailView" type='function'}
     {DetailView
         model=$model
@@ -55,5 +58,5 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
 }
 ?>
     ]}
-
+    </div>
 </div>
