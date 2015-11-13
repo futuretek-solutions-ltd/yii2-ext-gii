@@ -119,8 +119,11 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
             ],
                 <?php
                 } else
-                if (++$count < 6) {
-                    echo "            '" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
+                if (++$count < 6) { ?>
+                [
+                    'attribute' => '<?= $column->name ?>',
+                ],
+                <?php
                 }
             }
         }
