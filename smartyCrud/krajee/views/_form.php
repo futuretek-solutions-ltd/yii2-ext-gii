@@ -39,7 +39,7 @@ if (empty($safeAttributes)) {
         {if $model->isNewRecord}
         {Html::submitButton(<?= $generator->generateString('Create') ?>, ['class' => 'btn btn-success btn-lg'])}
         {else}
-        {Html::submitButton(<?= $generator->generateString('Update') ?>, ['class' => 'btn btn-primary btn-lg'])}
+        {Html::submitButton(<?= $generator->generateString('Save') ?>, ['class' => 'btn btn-primary btn-lg'])}
         {/if}
     </div>
     {/ActiveForm}

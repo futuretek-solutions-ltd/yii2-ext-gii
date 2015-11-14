@@ -119,8 +119,11 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
             ],
                 <?php
                 } else
-                if (++$count < 6) {
-                    echo "            '" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
+                if (++$count < 6) { ?>
+                [
+                    'attribute' => '<?= $column->name ?>',
+                ],
+                <?php
                 }
             }
         }
@@ -173,7 +176,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
 
     /**
      * Creates a new <?= $modelClass ?> model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * If creation is successful, the browser will be redirected to the index page.
      * @return mixed
      */
     public function actionCreate()
@@ -182,7 +185,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
 
         /** @noinspection NotOptimalIfConditionsInspection */
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', <?= $urlParams ?>]);
+            return $this->redirect(['index']);
         } else {
             $this->assign([
                 'model' => $model,
@@ -193,7 +196,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
 
     /**
      * Updates an existing <?= $modelClass ?> model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * If update is successful, the browser will be redirected to the index page.
      * <?= implode("\n     * ", $actionParamComments) . "\n" ?>
      * @return mixed
      * @throws NotFoundHttpException
@@ -204,7 +207,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
 
         /** @noinspection NotOptimalIfConditionsInspection */
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', <?= $urlParams ?>]);
+            return $this->redirect(['index']);
         } else {
             $this->assign([
                 'model' => $model,
