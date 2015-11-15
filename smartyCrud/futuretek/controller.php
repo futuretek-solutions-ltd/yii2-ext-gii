@@ -102,8 +102,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
                 'width' => '120px',
             ],
                 <?php
-                } else
-                if (++$count < 6) {
+                } else {
                     echo "            '" . $name . "',\n";
                 }
             }
@@ -118,8 +117,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
                 'width' => '120px',
             ],
                 <?php
-                } else
-                if (++$count < 6) { ?>
+                } else { ?>
                 [
                     'attribute' => '<?= $column->name ?>',
                 ],
