@@ -82,6 +82,18 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
 <?php endforeach; ?>
         ];
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeHints()
+    {
+        return [
+        <?php foreach ($labels as $name => $label): ?>
+            <?= "'$name' => " . $generator->generateString('') . ",\n" ?>
+        <?php endforeach; ?>
+        ];
+    }
 <?php foreach ($relations as $name => $relation): ?>
 
     /**

@@ -71,16 +71,16 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
         'dataProvider'=>$dataProvider,
         <?= !empty($generator->searchModelClass) ? '\'filterModel\'=>$searchModel,': ''; ?>
         'toolbar'=>[
-            [
-                'content' => Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['class'=>'btn btn-success'])
-            ],
-            '{export}',
-            '{toggleData}'
+            'content' => Html::a(
+                '<i class="glyphicon glyphicon-plus"></i>' . <?= $generator->generateString('Create ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>, //todo: Edit new button name
+                ['create'],
+                ['class' => 'btn btn-success'] //todo: Edit new button name
+            )
         ],
-        'layout' => '{summary}<div class="row"><div class="col-md-4 pull-right"><div class="pull-right">{toolbar}</div></div></div>{items}{pager}',
+        'export' => false,
+        'layout' => '<div class="row"><div class="col-md-4 pull-right text-right m-b-md">{toolbar}</div><div class="col-xs-12">{items}</div><div class="col-md-6">{summary}</div><div class="col-md-6"><div class="pull-right">{pager}</div></div></div>',
         'pjax'=>true,
         'columns'=>[
-            ['class' => 'kartik\grid\SerialColumn'],
         <?php
         $count = 0;
         if (($tableSchema = $generator->getTableSchema()) === false) {

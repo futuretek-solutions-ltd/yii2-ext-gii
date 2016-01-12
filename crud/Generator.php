@@ -32,12 +32,14 @@ use yii\web\Controller;
  */
 class Generator extends \yii\gii\Generator
 {
-    public $modelClass;
-    public $controllerClass;
-    public $viewPath;
+    public $modelClass = 'app\models\db\\';
+    public $controllerClass = 'app\controllers\\';
+    public $viewPath = '@app/views/';
     public $baseControllerClass = 'app\classes\Controller';
-    public $indexWidgetType = 'grid';
-    public $searchModelClass = '';
+    public $indexWidgetType = 'krajeegrid';
+    public $searchModelClass = 'app\models\search\\';
+    public $layout = 'main';
+    public $enableI18N = true;
 
 
     /**
@@ -167,7 +169,7 @@ class Generator extends \yii\gii\Generator
         $viewPath = $this->getViewPath();
         $templatePath = $this->getTemplatePath() . '/views';
         foreach (scandir($templatePath) as $file) {
-            if (empty($this->searchModelClass) && $file === '_search.php') {
+            if ((empty($this->searchModelClass) || $this->indexWidgetType === 'krajeegrid') && $file === '_search.php') {
                 continue;
             }
             if (is_file($templatePath . '/' . $file) && pathinfo($file, PATHINFO_EXTENSION) === 'php') {
