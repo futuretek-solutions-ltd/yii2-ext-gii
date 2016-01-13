@@ -23,11 +23,20 @@ $this->title = <?= $generator->generateString(Inflector::pluralize(Inflector::ca
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-index">
-
+    <div class="row">
     <h1><?= "<?= " ?>Html::encode($this->title) ?></h1>
 <?php if(!empty($generator->searchModelClass)): ?>
 <?= "    <?php " . ($generator->indexWidgetType === 'grid' || $generator->indexWidgetType === 'krajeegrid' ? '// ' : '') ?>echo $this->render('_search', ['model' => $searchModel]); ?>
 <?php endif; ?>
+
+    <?php if($generator->indexWidgetType === 'krajeegrid') {?>
+        <div class="col-xs-12">
+            <p>
+                <em><!-- todo description --></em>
+            </p>
+        </div>
+    <?php } ?>
+
 
     <?php if($generator->indexWidgetType !== 'krajeegrid') {?>
     <p>
@@ -74,11 +83,11 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
             'content' => Html::a(
                 '<i class="glyphicon glyphicon-plus"></i>' . <?= $generator->generateString('Create ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>, //todo: Edit new button name
                 ['create'],
-                ['class' => 'btn btn-success'] //todo: Edit new button name
+                ['class' => 'btn btn-success', 'title' => <?= $generator->generateString('Create ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>] //todo: Edit new button name
             )
         ],
         'export' => false,
-        'layout' => '<div class="row"><div class="col-md-4 pull-right text-right m-b-md">{toolbar}</div><div class="col-xs-12">{items}</div><div class="col-md-6">{summary}</div><div class="col-md-6"><div class="pull-right">{pager}</div></div></div>',
+        'layout' => '<div class="col-md-4 pull-right text-right m-b-md">{toolbar}</div><div class="col-xs-12">{items}</div><div class="col-md-6">{summary}</div><div class="col-md-6"><div class="pull-right">{pager}</div></div>',
         'pjax'=>true,
         'columns'=>[
         <?php
@@ -114,5 +123,5 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
         },
     ]) ?>
 <?php } ?>
-
+    </div>
 </div>

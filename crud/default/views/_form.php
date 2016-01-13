@@ -31,8 +31,8 @@ use yii\bootstrap\ActiveForm;
         'fieldConfig' => [
             'template' => '{label}{beginWrapper}{input}{hint}{error}{endWrapper}',
             'horizontalCssClasses' => [
-                'label' => 'col xs-12 col-sm-3',
-                'offset' => 'col-sm-offset-2',
+                'label' => 'col-xs-12 col-sm-3',
+                'offset' => 'col-sm-offset-1',
                 'wrapper' => 'col-xs-12 col-sm-7',
                 'error' => '',
                 'hint' => ''
@@ -45,7 +45,7 @@ use yii\bootstrap\ActiveForm;
         echo "    <?= " . $generator->generateActiveField($attribute) . " ?>\n\n";
     }
 } ?>
-    <div class="form-group pull-right">
+    <div class="pull-right">
         <?= "<?= " ?>Html::submitButton($model->isNewRecord ? <?= $generator->generateString('Create') ?> : <?= $generator->generateString('Update') ?>, ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
