@@ -81,7 +81,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
         <?= !empty($generator->searchModelClass) ? '\'filterModel\'=>$searchModel,': ''; ?>
         'toolbar'=>[
             'content' => Html::a(
-                '<i class="glyphicon glyphicon-plus"></i>' . <?= $generator->generateString('Create ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>, //todo: Edit new button name
+                '<i class="glyphicon glyphicon-plus"></i> ' . <?= $generator->generateString('Create ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>, //todo: Edit new button name
                 ['create'],
                 ['class' => 'btn btn-success', 'title' => <?= $generator->generateString('Create ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>] //todo: Edit new button name
             )
