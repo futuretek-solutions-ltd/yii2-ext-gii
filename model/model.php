@@ -61,6 +61,7 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
     {
         return [
             <?= implode(",\n            ", $rules) . "," ?>
+
         ];
     }
 
@@ -71,7 +72,8 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
     {
         return [
             'default' => [
-                <?php foreach ($tableSchema->columns as $column):?><?php if ($column->name === 'id' || $column->name === 'created_at' || $column->name === 'updated_at' ) continue; ?><?= "'{$column->name}'," ?><?php endforeach; ?>
+                <?php foreach ($tableSchema->columns as $column):?><?php if ($column->name === 'id' || $column->name === 'created_at' || $column->name === 'updated_at' ) continue; ?><?= "'{$column->name}', " ?><?php endforeach; ?>
+
             ],
         ];
     }
@@ -82,9 +84,9 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
     public function attributeLabels()
     {
         return [
-        <?php foreach ($labels as $name => $label): ?>
-            <?= "'$name' => " . $generator->generateString($label) . ",\n" ?>
-        <?php endforeach; ?>
+<?php foreach ($labels as $name => $label):
+    echo "\t\t\t'$name' => " . $generator->generateString($label) . ",\n";
+endforeach; ?>
         ];
     }
 
@@ -94,9 +96,9 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
     public function attributeHints()
     {
         return [
-        <?php foreach ($labels as $name => $label): ?>
-            <?= "'$name' => " . $generator->generateString('') . ",\n" ?>
-        <?php endforeach; ?>
+<?php foreach ($labels as $name => $label):
+    echo "\t\t\t'$name' => " . $generator->generateString('') . ",\n";
+endforeach; ?>
         ];
     }
 <?php foreach ($relations as $name => $relation): ?>
