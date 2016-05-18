@@ -19,6 +19,7 @@ echo "<?php\n";
 namespace <?= $generator->ns ?>;
 
 use Yii;
+use futuretek\yii\shared\DbModel;
 
 /**
  * This is the model class for table "<?= $generator->generateTableName($tableName) ?>".
@@ -58,7 +59,9 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
      */
     public function rules()
     {
-        return [<?= "\n            " . implode(",\n            ", $rules) . "\n        " ?>];
+        return [
+            <?= implode(",\n            ", $rules) . "," ?>
+        ];
     }
 
     /**
@@ -67,7 +70,9 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
     public function scenarios()
     {
         return [
-            'default' => [<?php foreach ($tableSchema->columns as $column):?><?php if ($column->name === 'id' || $column->name === 'created_at' || $column->name === 'updated_at' ) continue; ?><?= "'{$column->name}'," ?><?php endforeach; ?>]
+            'default' => [
+                <?php foreach ($tableSchema->columns as $column):?><?php if ($column->name === 'id' || $column->name === 'created_at' || $column->name === 'updated_at' ) continue; ?><?= "'{$column->name}'," ?><?php endforeach; ?>
+            ],
         ];
     }
 
@@ -77,9 +82,9 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
     public function attributeLabels()
     {
         return [
-<?php foreach ($labels as $name => $label): ?>
+        <?php foreach ($labels as $name => $label): ?>
             <?= "'$name' => " . $generator->generateString($label) . ",\n" ?>
-<?php endforeach; ?>
+        <?php endforeach; ?>
         ];
     }
 

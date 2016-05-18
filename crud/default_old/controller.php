@@ -40,8 +40,7 @@ use <?= ltrim($generator->baseControllerClass, '\\') ?>;
 use yii\base\InvalidParamException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use futuretek\yii\shared\Def;
+use futuretek\grid\GridView;
 
 /**
  * <?= $controllerClass ?> implements the CRUD actions for <?= $modelClass ?> model.
@@ -63,16 +62,6 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
                     'delete' => ['post'],
                 ],
             ],
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        //'roles' => [],
-                        //'actions' => [],
-                    ],
-                ],
-            ],
         ];
     }
 
@@ -83,28 +72,23 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
      */
     public function actionIndex()
     {
-        try {
 <?php if (!empty($generator->searchModelClass)): ?>
-            $searchModel = new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel = new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-            return $this->render('index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-            ]);
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
 <?php else: ?>
-            $dataProvider = new ActiveDataProvider([
-                'query' => <?= $modelClass ?>::find(),
-            ]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => <?= $modelClass ?>::find(),
+        ]);
 
-            return $this->render('index', [
-                'dataProvider' => $dataProvider,
-            ]);
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);
 <?php endif; ?>
-        } catch (\Throwable $e) {
-            Yii::$app->session->addFlash(Def::FLASH_ERROR, $e->getMessage());
-            return $this->redirect(['index']);
-        }
     }
 
     /**
@@ -116,14 +100,9 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
      */
     public function actionView(<?= $actionParams ?>)
     {
-        try {
-            return $this->render('view', [
-                'model' => $this->findModel(<?= $actionParams ?>),
-            ]);
-        } catch (\Throwable $e) {
-            Yii::$app->session->addFlash(Def::FLASH_ERROR, $e->getMessage());
-            return $this->redirect(['index']);
-        }
+        return $this->render('view', [
+            'model' => $this->findModel(<?= $actionParams ?>),
+        ]);
     }
 
     /**
@@ -134,20 +113,15 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
      */
     public function actionCreate()
     {
-        try {
-            $model = new <?= $modelClass ?>();
+        $model = new <?= $modelClass ?>();
 
-            /** @noinspection NotOptimalIfConditionsInspection */
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['index']);
-            } else {
-                return $this->render('create', [
-                    'model' => $model,
-                ]);
-            }
-        } catch (\Throwable $e) {
-            Yii::$app->session->addFlash(Def::FLASH_ERROR, $e->getMessage());
+        /** @noinspection NotOptimalIfConditionsInspection */
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
         }
     }
 
@@ -161,20 +135,15 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
      */
     public function actionUpdate(<?= $actionParams ?>)
     {
-        try {
-            $model = $this->findModel(<?= $actionParams ?>);
+        $model = $this->findModel(<?= $actionParams ?>);
 
-            /** @noinspection NotOptimalIfConditionsInspection */
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['index']);
-            } else {
-                return $this->render('update', [
-                    'model' => $model,
-                ]);
-            }
-        } catch (\Throwable $e) {
-            Yii::$app->session->addFlash(Def::FLASH_ERROR, $e->getMessage());
+        /** @noinspection NotOptimalIfConditionsInspection */
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
         }
     }
 
@@ -183,15 +152,11 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * <?= implode("\n     * ", $actionParamComments) . "\n" ?>
      * @return mixed
+     * @throws \Exception
      */
     public function actionDelete(<?= $actionParams ?>)
     {
-        try {
-            $model = $this->findModel(<?= $actionParams ?>);
-            $model->delete();
-        } catch (\Throwable $e) {
-            Yii::$app->session->addFlash(Def::FLASH_ERROR, $e->getMessage());
-        }
+        $this->findModel(<?= $actionParams ?>)->delete();
 
         return $this->redirect(['index']);
     }
@@ -219,7 +184,7 @@ if (count($pks) === 1) {
         if (($model = <?= $modelClass ?>::findOne(<?= $condition ?>)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException(Yii::t('error', 'The requested item does not exist.'));
+            throw new NotFoundHttpException(Yii::t('error', 'The requested page does not exist.'));
         }
     }
 }

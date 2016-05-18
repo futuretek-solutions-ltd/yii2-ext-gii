@@ -70,11 +70,6 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
             'pagination' => [
                 'pageSize' => 15,
             ],
-            'sort' => [
-                'defaultOrder' => [
-                    'id' => SORT_ASC,
-                ],
-            ],
         ]);
 
         $this->load($params);

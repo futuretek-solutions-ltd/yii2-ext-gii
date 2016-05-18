@@ -11,19 +11,23 @@ $urlParams = $generator->generateUrlParams();
 echo "<?php\n";
 ?>
 
-/**
- * @var yii\web\View $this
- * @var <?= ltrim($generator->modelClass, '\\') ?> $model
- */
+/* @var $this yii\web\View */
+/* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
 
-$this->title = <?= $generator->generateString('Update ' . Inflector::camel2words(StringHelper::basename($generator->modelClass)) . '{item}', ['item' => '$model->' . $generator->getNameAttribute()]) ?>;
-//$this->subtitle = <?= $generator->generateString('') ?>; //todo: Add subtitle
+use yii\helpers\Html;
+
+$this->title = <?= $generator->generateString('Update {modelClass}: ', ['modelClass' => Inflector::camel2words(StringHelper::basename($generator->modelClass))]) ?> . ' ' . $model-><?= $generator->getNameAttribute() ?>;
 $this->params['breadcrumbs'][] = ['label' => <?= $generator->generateString(Inflector::pluralize(Inflector::camel2words(StringHelper::basename($generator->modelClass)))) ?>, 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model-><?= $generator->getNameAttribute() ?>, 'url' => ['view', <?= $urlParams ?>]];
 $this->params['breadcrumbs'][] = <?= $generator->generateString('Update') ?>;
 ?>
-<div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-update crud-update spacer-top-20">
+<div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-update">
+    <div class="col-xs-12">
+        <h1><?= "<?= " ?>Html::encode($this->title) ?></h1>
+    </div>
+
     <?= "<?= " ?>$this->render('_form', [
         'model' => $model,
     ]) ?>
+
 </div>
