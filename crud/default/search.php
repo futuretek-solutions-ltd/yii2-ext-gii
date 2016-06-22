@@ -58,8 +58,8 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
      * Creates data provider instance with search query applied
      *
      * @param array $params
-     *
      * @return ActiveDataProvider
+     * @throws \yii\base\InvalidParamException
      */
     public function search($params)
     {

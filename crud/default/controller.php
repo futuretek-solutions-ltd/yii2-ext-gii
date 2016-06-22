@@ -183,6 +183,9 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * <?= implode("\n     * ", $actionParamComments) . "\n" ?>
      * @return mixed
+     * @throws \yii\db\StaleObjectException
+     * @throws \Exception
+     * @throws \yii\web\NotFoundHttpException
      */
     public function actionDelete(<?= $actionParams ?>)
     {

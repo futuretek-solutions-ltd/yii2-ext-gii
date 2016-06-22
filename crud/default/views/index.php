@@ -19,7 +19,7 @@ use futuretek\grid\GridView;
 
 /** 
  * @var yii\web\View $this
-<?= !empty($generator->searchModelClass) ? " * @var " . ltrim($generator->searchModelClass, '\\') . " $searchModel\n" : '' ?>
+<?= !empty($generator->searchModelClass) ? " * @var " . ltrim($generator->searchModelClass, '\\') . ' $searchModel' . "\n" : '' ?>
  * @var yii\data\ActiveDataProvider $dataProvider 
  */
 
@@ -78,7 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                     ?>
                     [
-                        'class' => 'kartik\grid\ActionColumn'
+                        'class' => 'kartik\grid\ActionColumn',
                         'viewOptions' => ['class' => 'btn btn-success btn-xs', 'label' => FA::i(FA::_EYE),],
                         'updateOptions' => ['class' => 'btn btn-primary btn-xs', 'label' => FA::i(FA::_PENCIL),],
                         'deleteOptions' => ['class' => 'btn btn-danger btn-xs', 'label' => FA::i(FA::_TIMES),],

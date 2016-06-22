@@ -49,7 +49,8 @@ use yii\bootstrap\ActiveForm;
                 //'type' => Box::TYPE_PRIMARY,
                 //'bodyClass' => 'no-padding',
                 'title' => $this->title,
-                'footer' => '<div class="pull-left"><?= "<?= " ?>Html::a(FA::i(FA::_TIMES) . ' ' . <?= $generator->generateString('Cancel') ?>, Yii::$app->request->referrer, ['class' => 'btn btn-warning']) ?></div><div class="pull-right"><?= "<?= " ?>Html::submitButton(FA::i(FA::_CHECK) . ' ' . ($model->isNewRecord ? <?= $generator->generateString('Create') ?> : <?= $generator->generateString('Update') ?>), ['class' => 'btn btn-success']) ?></div>',
+                'footer' => '<div class="pull-left">' . Html::a(FA::i(FA::_TIMES) . ' ' . <?= $generator->generateString('Cancel') ?>, Yii::$app->request->referrer, ['class' => 'btn btn-warning']) . '</div>
+                             <div class="pull-right">' . Html::submitButton(FA::i(FA::_CHECK) . ' ' . ($model->isNewRecord ? <?= $generator->generateString('Create') ?> : <?= $generator->generateString('Update') ?>), ['class' => 'btn btn-success']) . '</div>',
             ]) ?>
 
             <?php foreach ($generator->getColumnNames() as $attribute) {
