@@ -53,7 +53,21 @@ $this->params['breadcrumbs'][] = $this->title;
                     } else {
                         foreach ($tableSchema->columns as $column) {
                             $format = $generator->generateColumnFormat($column);
-                            echo "\t\t\t\t\t'" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
+                            if ($column->name === 'id') {
+                                echo "\t\t\t\t\t[\n\t\t\t\t\t\t'attribute' => '" . $column->name . "',\n\t\t\t\t\t\t'width' => '100px',\n\t\t\t\t\t],";
+                            } elseif ($format === 'datetime') {
+                                echo "\t\t\t\t\t[\n\t\t\t\t\t\t'attribute' => '" . $column->name . "',\n\t\t\t\t\t\t'format' => 'datetime',\n\t\t\t\t\t\t'filterType' => \\kartik\\grid\\GridView::FILTER_DATETIME,\n\t\t\t\t\t\t'width' => '250px',\n\t\t\t\t\t],";
+                            } elseif ($format === 'date') {
+                                echo "\t\t\t\t\t[\n\t\t\t\t\t\t'attribute' => '" . $column->name . "',\n\t\t\t\t\t\t'format' => 'date',\n\t\t\t\t\t\t'filterType' => \\kartik\\grid\\GridView::FILTER_DATE,\n\t\t\t\t\t\t'width' => '250px',\n\t\t\t\t\t],";
+                            } elseif ($format === 'time') {
+                                echo "\t\t\t\t\t[\n\t\t\t\t\t\t'attribute' => '" . $column->name . "',\n\t\t\t\t\t\t'format' => 'time',\n\t\t\t\t\t\t'filterType' => \\kartik\\grid\\GridView::FILTER_TIME,\n\t\t\t\t\t\t'width' => '250px',\n\t\t\t\t\t],";
+                            } elseif ($format === 'boolean') {
+                                echo "\t\t\t\t\t[\n\t\t\t\t\t\t'attribute' => '" . $column->name . "',\n\t\t\t\t\t\t'format' => 'boolean',\n\t\t\t\t\t\t'filterType' => \\kartik\\grid\\GridView::FILTER_SWITCH,\n\t\t\t\t\t\t'hAlign' => 'center',\n\t\t\t\t\t],";
+                            } elseif (strpos($column->name, 'price') !== false) {
+                                echo "\t\t\t\t\t[\n\t\t\t\t\t\t'attribute' => '" . $column->name . "',\n\t\t\t\t\t\t'format' => 'currency',\n\t\t\t\t\t\t'filterType' => \\kartik\\grid\\GridView::FILTER_MONEY,\n\t\t\t\t\t],";
+                            } else {
+                                echo "\t\t\t\t\t'" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
+                            }
                         }
                     }
                     ?>

@@ -294,6 +294,16 @@ class Generator extends \yii\gii\Generator
             return 'ntext';
         } elseif (stripos($column->name, 'time') !== false && $column->phpType === 'integer') {
             return 'datetime';
+        } elseif ($column->type === 'datetime') {
+            return 'datetime';
+        } elseif ($column->type === 'date') {
+            return 'date';
+        } elseif ($column->type === 'time') {
+            return 'time';
+        } elseif ($column->type === 'decimal') {
+            return 'decimal';
+        } elseif ($column->dbType === 'tinyint(1)') {
+            return 'boolean';
         } elseif (stripos($column->name, 'email') !== false) {
             return 'email';
         } elseif (stripos($column->name, 'url') !== false) {
