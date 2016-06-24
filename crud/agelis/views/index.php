@@ -29,33 +29,18 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-index crud-index">
     <div class="row">
-        <div class="col-xs-12">
-            <p>
-                <!-- todo description -->
-                <em><?= "<?= Yii::t('app', ''); ?>" ?></em>
-            </p>
-        </div>
-
         <div class="col-xs-12 spacer-top-10">
-            <?= "<?php" ?> Box::begin([
-                //'type' => Box::TYPE_PRIMARY,
-                'bodyClass' => 'no-padding',
-                'title' => $this->title,
-                'custom_tools' => yii\helpers\Html::a(
-                    FA::i(FA::_PLUS) . ' ' . <?= $generator->generateString('New ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>,
-                    ['create'],
-                    ['class' => 'btn btn-success btn-xs', 'title' => <?= $generator->generateString('New ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>]
-                ),
-            ]) ?>
-
-            <?= "<?=" ?> GridView::widget([
-                'dataProvider' => $dataProvider,
-                <?= !empty($generator->searchModelClass) ? '\'filterModel\' => $searchModel,': ''; ?>
-                'toolbar' => false,
-                'export' => false,
-                'layout' => '{items}<div class="row"><div class="col-md-6">{summary}</div><div class="col-md-6"><div class="pull-right">{pager}</div></div></div>',
-                'pjax' => true,
-                'columns'=>[
+            <?= '<?php' ?> \app\classes\FtsWidget::dynaGrid(
+                'grid-<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-index',
+                $dataProvider,
+                $searchModel,
+                [
+                    'exportFileName' => <?= $generator->generateString(Inflector::camel2id(StringHelper::basename($generator->modelClass))) ?>,
+                    'newButtonLabel' => <?= $generator->generateString('New ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>,
+                    'description' => <?= $generator->generateString('') ?>, //todo: add description
+                    'helpUrl' => '/help/display/' . substr(Yii::$app->language, 0, 2) . '/<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-index'
+                ],
+                [
                     <?php
                     $count = 0;
                     if (($tableSchema = $generator->getTableSchema()) === false) {
@@ -85,10 +70,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'template' => '{view}&nbsp;&nbsp;{update}&nbsp;&nbsp;{delete}',
                         'width' => '110px',
                     ],
-                ],
-            ]); ?>
-
-            <?= "<?php" ?> Box::end() ?>
+                ]
+            ); ?>
         </div>
     </div>
 </div>

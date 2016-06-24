@@ -35,6 +35,7 @@ use yii\bootstrap\ActiveForm;
                 'layout' => 'horizontal',
                 'fieldConfig' => [
                     'template' => '{label}{beginWrapper}{input}{hint}{error}{endWrapper}',
+                    'hintOptions' => ['class' => 'hint-block'],
                     'horizontalCssClasses' => [
                         'label' => 'col-xs-12 col-sm-3',
                         'offset' => 'col-sm-offset-2',
@@ -46,9 +47,14 @@ use yii\bootstrap\ActiveForm;
             ]); ?>
 
             <?= "<?php" ?> Box::begin([
-                //'type' => Box::TYPE_PRIMARY,
+                'type' => Box::TYPE_PRIMARY,
                 //'bodyClass' => 'no-padding',
                 'title' => '&nbsp;',
+                'custom_tools' => yii\helpers\Html::a(
+                    FA::i(FA::_QUESTION_CIRCLE),
+                    ['/help/display/' . substr(Yii::$app->language, 0, 2) . '/<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-form'],
+                    ['class' => 'btn btn-primary btn-xs', 'title' => Yii::t('app', 'Help'), 'target' => '_blank']
+                ),
                 'footer' => '<div class="pull-left">' . Html::a(FA::i(FA::_TIMES) . ' ' . <?= $generator->generateString('Cancel') ?>, Yii::$app->request->referrer, ['class' => 'btn btn-warning']) . '</div>
                              <div class="pull-right">' . Html::submitButton(FA::i(FA::_CHECK) . ' ' . ($model->isNewRecord ? <?= $generator->generateString('Create') ?> : <?= $generator->generateString('Update') ?>), ['class' => 'btn btn-success']) . '</div>',
             ]) ?>

@@ -54,6 +54,7 @@
                         "ftsCrud": {
                             "class": "futuretek\\gii\\generators\\crud\\Generator",
                             "templates": {
+                                "agelis": "@app/vendor/futuretek/yii2-gii-generators/crud/agelis",
                                 "default": "@app/vendor/futuretek/yii2-gii-generators/crud/default",
                                 "purus": "@app/vendor/futuretek/yii2-gii-generators/crud/purus"
                             }

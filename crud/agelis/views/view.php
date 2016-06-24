@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <!-- SUMMARY -->
         <div class="col-xs-12">
             <?= "<?php" ?> Box::begin([
-                //'type' => Box::TYPE_SUCCESS,
+                'type' => Box::TYPE_INFO,
                 'bodyClass' => 'no-padding',
                 'title' => <?= $generator->generateString('Summary') ?>,
                 'custom_tools' =>
@@ -43,6 +43,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             'method' => 'post',
                         ],
                     ]),
+                    Html::a(
+                        FA::i(FA::_QUESTION_CIRCLE),
+                        ['/help/display/' . substr(Yii::$app->language, 0, 2) . '/<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view'],
+                        ['class' => 'btn btn-primary btn-xs', 'title' => Yii::t('app', 'Help'), 'target' => '_blank']
+                    ),
             ]) ?>
             <?php
             $fields = [];
