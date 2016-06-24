@@ -16,7 +16,7 @@ echo "<?php\n";
  * @var <?= ltrim($generator->modelClass, '\\') ?> $model
  */
 
-$this->title = <?= $generator->generateString('Update ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))) . '$model->' . $generator->getNameAttribute() ?>;
+$this->title = <?= $generator->generateString('Update ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))) . ' . \' \' . $model->' . $generator->getNameAttribute() ?>;
 //$this->params['subtitle'] = <?= $generator->generateString('') ?>; //todo: Add subtitle
 $this->params['breadcrumbs'][] = ['label' => <?= $generator->generateString(Inflector::pluralize(Inflector::camel2words(StringHelper::basename($generator->modelClass)))) ?>, 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model-><?= $generator->getNameAttribute() ?>, 'url' => ['view', <?= $urlParams ?>]];

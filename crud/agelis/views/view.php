@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'confirm' => <?= $generator->generateString('Are you sure you want to delete this item?') ?>,
                             'method' => 'post',
                         ],
-                    ]),
+                    ]) . '&nbsp;&nbsp;&nbsp;' .
                     Html::a(
                         FA::i(FA::_QUESTION_CIRCLE),
                         ['/help/display/' . substr(Yii::$app->language, 0, 2) . '/<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view'],

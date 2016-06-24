@@ -47,7 +47,7 @@ use yii\bootstrap\ActiveForm;
             ]); ?>
 
             <?= "<?php" ?> Box::begin([
-                'type' => Box::TYPE_PRIMARY,
+                'type' => Box::TYPE_INFO,
                 //'bodyClass' => 'no-padding',
                 'title' => '&nbsp;',
                 'custom_tools' => yii\helpers\Html::a(
