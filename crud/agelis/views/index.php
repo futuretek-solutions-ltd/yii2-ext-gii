@@ -12,10 +12,7 @@ $nameAttribute = $generator->getNameAttribute();
 echo "<?php\n";
 ?>
 
-use yii\helpers\Html;
-use futuretek\adminlte\widget\Box;
 use rmrevin\yii\fontawesome\FA;
-use futuretek\grid\GridView;
 
 /** 
  * @var yii\web\View $this
@@ -45,20 +42,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     $count = 0;
                     if (($tableSchema = $generator->getTableSchema()) === false) {
                         foreach ($generator->getColumnNames() as $name) {
-                            if (++$count < 6) {
-                                echo "\t\t\t\t\t'" . $name . "',\n";
+                            if ($name == 'id') {
+                                echo "\t\t\t\t\t[\n\t\t\t\t\t\t'attribute' => '" . $name . "',\n\t\t\t\t\t\t'width' => '100px',\n\t\t\t\t\t],";
+                            } elseif ($name == 'created_at' || $name == 'updated_at') {
+                                echo "\t\t\t\t\t[\n\t\t\t\t\t\t'attribute' => '" . $name . "',\n\t\t\t\t\t\t'format' => 'datetime',\n\t\t\t\t\t\t'filterType' => \\kartik\\grid\\GridView::FILTER_DATETIME,\n\t\t\t\t\t\t'width' => '250px',\n\t\t\t\t\t],";
                             } else {
-                                echo "\t\t\t\t\t//'" . $name . "',\n";
+                                echo "\t\t\t\t\t'" . $name . "',\n";
                             }
                         }
                     } else {
                         foreach ($tableSchema->columns as $column) {
                             $format = $generator->generateColumnFormat($column);
-                            if (++$count < 6) {
-                                echo "\t\t\t\t\t'" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
-                            } else {
-                                echo "\t\t\t\t\t//'" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
-                            }
+                            echo "\t\t\t\t\t'" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
                         }
                     }
                     ?>
