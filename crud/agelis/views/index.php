@@ -62,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             } elseif ($format === 'time') {
                                 echo "\t\t\t\t\t[\n\t\t\t\t\t\t'attribute' => '" . $column->name . "',\n\t\t\t\t\t\t'format' => 'time',\n\t\t\t\t\t\t'filterType' => \\kartik\\grid\\GridView::FILTER_TIME,\n\t\t\t\t\t\t'width' => '250px',\n\t\t\t\t\t],\n";
                             } elseif ($format === 'boolean') {
-                                echo "\t\t\t\t\t[\n\t\t\t\t\t\t'attribute' => '" . $column->name . "',\n\t\t\t\t\t\t'format' => 'boolean',\n\t\t\t\t\t\t'filterType' => \\kartik\\grid\\GridView::FILTER_SWITCH,\n\t\t\t\t\t\t'hAlign' => 'center',\n\t\t\t\t\t],\n";
+                                echo "\t\t\t\t\t[\n\t\t\t\t\t\t'attribute' => '" . $column->name . "',\n\t\t\t\t\t\t'format' => 'boolean',\n\t\t\t\t\t\t'filter' => \\app\\classes\\FtsWidget::dropDownYesNo(" . '$searchModel' . ", '{$column->name}'),\n\t\t\t\t\t\t'hAlign' => 'center',\n\t\t\t\t\t],\n";
                             } elseif (strpos($column->name, 'price') !== false) {
                                 echo "\t\t\t\t\t[\n\t\t\t\t\t\t'attribute' => '" . $column->name . "',\n\t\t\t\t\t\t'format' => 'currency',\n\t\t\t\t\t\t'filterType' => \\kartik\\grid\\GridView::FILTER_MONEY,\n\t\t\t\t\t],\n";
                             } else {
@@ -73,6 +73,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     ?>
                     [
                         'class' => 'kartik\grid\ActionColumn',
+                        'headerOptions' => ['data-noresize' => ''],
+                        'contentOptions' => ['class' => 'actionColumn'],
                         'viewOptions' => ['class' => 'btn btn-success btn-xs view-button', 'label' => FA::i(FA::_EYE),],
                         'updateOptions' => ['class' => 'btn btn-primary btn-xs update-button', 'label' => FA::i(FA::_PENCIL),],
                         'deleteOptions' => ['class' => 'btn btn-danger btn-xs delete-button', 'label' => FA::i(FA::_TIMES),],
