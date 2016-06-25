@@ -429,6 +429,7 @@ class Generator extends \yii\gii\Generator
             case Schema::TYPE_DATE:
             case Schema::TYPE_TIME:
             case Schema::TYPE_DATETIME:
+                $hashConditions[] = "'DATE({$column})' => \$this->{$column},";
             case Schema::TYPE_TIMESTAMP:
                 $hashConditions[] = "'{$column}' => \$this->{$column},";
                 break;
