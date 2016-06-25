@@ -54,17 +54,17 @@ $this->params['breadcrumbs'][] = $this->title;
                         foreach ($tableSchema->columns as $column) {
                             $format = $generator->generateColumnFormat($column);
                             if ($column->name === 'id') {
-                                echo "\t\t\t\t\t[\n\t\t\t\t\t\t'attribute' => '" . $column->name . "',\n\t\t\t\t\t\t'width' => '100px',\n\t\t\t\t\t],";
+                                echo "\t\t\t\t\t[\n\t\t\t\t\t\t'attribute' => '" . $column->name . "',\n\t\t\t\t\t\t'width' => '100px',\n\t\t\t\t\t],\n";
                             } elseif ($format === 'datetime') {
-                                echo "\t\t\t\t\t[\n\t\t\t\t\t\t'attribute' => '" . $column->name . "',\n\t\t\t\t\t\t'format' => 'datetime',\n\t\t\t\t\t\t'filterType' => \\kartik\\grid\\GridView::FILTER_DATETIME,\n\t\t\t\t\t\t'width' => '250px',\n\t\t\t\t\t],";
+                                echo "\t\t\t\t\t[\n\t\t\t\t\t\t'attribute' => '" . $column->name . "',\n\t\t\t\t\t\t'format' => 'datetime',\n\t\t\t\t\t\t'filterType' => \\kartik\\grid\\GridView::FILTER_DATETIME,\n\t\t\t\t\t\t'width' => '250px',\n\t\t\t\t\t],\n";
                             } elseif ($format === 'date') {
-                                echo "\t\t\t\t\t[\n\t\t\t\t\t\t'attribute' => '" . $column->name . "',\n\t\t\t\t\t\t'format' => 'date',\n\t\t\t\t\t\t'filterType' => \\kartik\\grid\\GridView::FILTER_DATE,\n\t\t\t\t\t\t'width' => '250px',\n\t\t\t\t\t],";
+                                echo "\t\t\t\t\t[\n\t\t\t\t\t\t'attribute' => '" . $column->name . "',\n\t\t\t\t\t\t'format' => 'date',\n\t\t\t\t\t\t'filterType' => \\kartik\\grid\\GridView::FILTER_DATE,\n\t\t\t\t\t\t'width' => '250px',\n\t\t\t\t\t],\n";
                             } elseif ($format === 'time') {
-                                echo "\t\t\t\t\t[\n\t\t\t\t\t\t'attribute' => '" . $column->name . "',\n\t\t\t\t\t\t'format' => 'time',\n\t\t\t\t\t\t'filterType' => \\kartik\\grid\\GridView::FILTER_TIME,\n\t\t\t\t\t\t'width' => '250px',\n\t\t\t\t\t],";
+                                echo "\t\t\t\t\t[\n\t\t\t\t\t\t'attribute' => '" . $column->name . "',\n\t\t\t\t\t\t'format' => 'time',\n\t\t\t\t\t\t'filterType' => \\kartik\\grid\\GridView::FILTER_TIME,\n\t\t\t\t\t\t'width' => '250px',\n\t\t\t\t\t],\n";
                             } elseif ($format === 'boolean') {
-                                echo "\t\t\t\t\t[\n\t\t\t\t\t\t'attribute' => '" . $column->name . "',\n\t\t\t\t\t\t'format' => 'boolean',\n\t\t\t\t\t\t'filterType' => \\kartik\\grid\\GridView::FILTER_SWITCH,\n\t\t\t\t\t\t'hAlign' => 'center',\n\t\t\t\t\t],";
+                                echo "\t\t\t\t\t[\n\t\t\t\t\t\t'attribute' => '" . $column->name . "',\n\t\t\t\t\t\t'format' => 'boolean',\n\t\t\t\t\t\t'filterType' => \\kartik\\grid\\GridView::FILTER_SWITCH,\n\t\t\t\t\t\t'hAlign' => 'center',\n\t\t\t\t\t],\n";
                             } elseif (strpos($column->name, 'price') !== false) {
-                                echo "\t\t\t\t\t[\n\t\t\t\t\t\t'attribute' => '" . $column->name . "',\n\t\t\t\t\t\t'format' => 'currency',\n\t\t\t\t\t\t'filterType' => \\kartik\\grid\\GridView::FILTER_MONEY,\n\t\t\t\t\t],";
+                                echo "\t\t\t\t\t[\n\t\t\t\t\t\t'attribute' => '" . $column->name . "',\n\t\t\t\t\t\t'format' => 'currency',\n\t\t\t\t\t\t'filterType' => \\kartik\\grid\\GridView::FILTER_MONEY,\n\t\t\t\t\t],\n";
                             } else {
                                 echo "\t\t\t\t\t'" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
                             }
@@ -73,9 +73,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     ?>
                     [
                         'class' => 'kartik\grid\ActionColumn',
-                        'viewOptions' => ['class' => 'btn btn-success btn-xs', 'label' => FA::i(FA::_EYE),],
-                        'updateOptions' => ['class' => 'btn btn-primary btn-xs', 'label' => FA::i(FA::_PENCIL),],
-                        'deleteOptions' => ['class' => 'btn btn-danger btn-xs', 'label' => FA::i(FA::_TIMES),],
+                        'viewOptions' => ['class' => 'btn btn-success btn-xs view-button', 'label' => FA::i(FA::_EYE),],
+                        'updateOptions' => ['class' => 'btn btn-primary btn-xs update-button', 'label' => FA::i(FA::_PENCIL),],
+                        'deleteOptions' => ['class' => 'btn btn-danger btn-xs delete-button', 'label' => FA::i(FA::_TIMES),],
                         'template' => '{view}&nbsp;&nbsp;{update}&nbsp;&nbsp;{delete}',
                         'width' => '110px',
                     ],
