@@ -101,7 +101,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
                 'dataProvider' => $dataProvider,
             ]);
 <?php endif; ?>
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
             Yii::$app->session->addFlash(Def::FLASH_ERROR, $e->getMessage());
             return $this->redirect(['index']);
         }
@@ -120,7 +120,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
             return $this->render('view', [
                 'model' => $this->findModel(<?= $actionParams ?>),
             ]);
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
             Yii::$app->session->addFlash(Def::FLASH_ERROR, $e->getMessage());
             return $this->redirect(['index']);
         }
@@ -145,7 +145,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
                     'model' => $model,
                 ]);
             }
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
             Yii::$app->session->addFlash(Def::FLASH_ERROR, $e->getMessage());
             return $this->redirect(['index']);
         }
@@ -172,7 +172,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
                     'model' => $model,
                 ]);
             }
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
             Yii::$app->session->addFlash(Def::FLASH_ERROR, $e->getMessage());
             return $this->redirect(['index']);
         }
@@ -192,7 +192,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
         try {
             $model = $this->findModel(<?= $actionParams ?>);
             $model->delete();
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
             Yii::$app->session->addFlash(Def::FLASH_ERROR, $e->getMessage());
         }
 
