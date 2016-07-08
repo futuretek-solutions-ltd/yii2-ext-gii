@@ -38,7 +38,7 @@ use yii\bootstrap\ActiveForm;
                     'hintOptions' => ['class' => 'hint-block'],
                     'horizontalCssClasses' => [
                         'label' => 'col-xs-12 col-sm-3',
-                        'offset' => 'col-sm-offset-2',
+                        'offset' => 'col-sm-offset-3',
                         'wrapper' => 'col-xs-12 col-sm-4',
                         'error' => '',
                         'hint' => ''
