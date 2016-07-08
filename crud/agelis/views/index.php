@@ -73,8 +73,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     ?>
                     [
                         'class' => 'kartik\grid\ActionColumn',
-                        'headerOptions' => ['data-noresize' => ''],
-                        'contentOptions' => ['class' => 'actionColumn'],
+                        'headerOptions' => ['data-noresize' => '', 'class' => ' no-print'],
+                        'contentOptions' => ['class' => 'actionColumn no-print'],
                         'viewOptions' => ['class' => 'btn btn-success btn-xs view-button', 'label' => FA::i(FA::_EYE),],
                         'updateOptions' => ['class' => 'btn btn-primary btn-xs update-button', 'label' => FA::i(FA::_PENCIL),],
                         'deleteOptions' => ['class' => 'btn btn-danger btn-xs delete-button', 'label' => FA::i(FA::_TIMES),],

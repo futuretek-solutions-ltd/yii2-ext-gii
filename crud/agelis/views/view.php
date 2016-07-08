@@ -35,9 +35,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'bodyClass' => 'no-padding',
                 'title' => <?= $generator->generateString('Summary') ?>,
                 'custom_tools' =>
-                    Html::a(FA::i(FA::_PENCIL) . ' ' . <?= $generator->generateString('Update') ?>, ['update', <?= $urlParams ?>], ['class' => 'btn btn-primary btn-xs']) . '&nbsp;&nbsp;&nbsp;' .
+                    Html::a(FA::i(FA::_PENCIL) . ' ' . <?= $generator->generateString('Update') ?>, ['update', <?= $urlParams ?>], ['class' => 'btn btn-primary btn-xs no-print']) . '&nbsp;&nbsp;&nbsp;' .
                     Html::a(FA::i(FA::_TIMES) . ' ' . <?= $generator->generateString('Delete') ?>, ['delete', <?= $urlParams ?>], [
-                        'class' => 'btn btn-danger btn-xs',
+                        'class' => 'btn btn-danger btn-xs no-print',
                         'data' => [
                             'confirm' => <?= $generator->generateString('Are you sure you want to delete this item?') ?>,
                             'method' => 'post',
@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     Html::a(
                         FA::i(FA::_QUESTION_CIRCLE),
                         ['/help/display/' . substr(Yii::$app->language, 0, 2) . '/<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view'],
-                        ['class' => 'btn btn-primary btn-xs', 'title' => Yii::t('app', 'Help'), 'target' => '_blank']
+                        ['class' => 'btn btn-primary btn-xs no-print', 'title' => Yii::t('app', 'Help'), 'target' => '_blank']
                     ),
             ]) ?>
             <?php
