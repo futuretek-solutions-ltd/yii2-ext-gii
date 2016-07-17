@@ -222,7 +222,7 @@ if (count($pks) === 1) {
         if (($model = <?= $modelClass ?>::findOne(<?= $condition ?>)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException(Yii::t('error', 'The requested item does not exist.'));
+            throw new NotFoundHttpException(Yii::t('app', 'The requested item does not exist.'));
         }
     }
 }
