@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]) . '&nbsp;&nbsp;&nbsp;' .
                     Html::a(
                         FA::i(FA::_QUESTION_CIRCLE),
-                        ['/help/display/' . substr(Yii::$app->language, 0, 2) . '/<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view'],
+                        ['/help/display/' . Yii::$app->language . '/<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view'],
                         ['class' => 'btn btn-primary btn-sm no-print', 'title' => Yii::t('app', 'Help'), 'target' => '_blank']
                     ),
             ]) ?>

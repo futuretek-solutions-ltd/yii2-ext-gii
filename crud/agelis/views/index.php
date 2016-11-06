@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'exportFileName' => <?= $generator->generateString(Inflector::camel2id(StringHelper::basename($generator->modelClass))) ?>,
                     'newButtonLabel' => <?= $generator->generateString('New ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>,
                     'description' => <?= $generator->generateString('') ?>, //todo: add description
-                    'helpUrl' => '/help/display/' . substr(Yii::$app->language, 0, 2) . '/<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-index'
+                    'helpUrl' => '/help/display/' . Yii::$app->language . '/<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-index'
                 ],
                 [
                     <?php

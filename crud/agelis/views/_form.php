@@ -52,7 +52,7 @@ use yii\bootstrap\ActiveForm;
                 'title' => '&nbsp;',
                 'custom_tools' => yii\helpers\Html::a(
                     FA::i(FA::_QUESTION_CIRCLE),
-                    ['/help/display/' . substr(Yii::$app->language, 0, 2) . '/<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-form'],
+                    ['/help/display/' . Yii::$app->language . '/<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-form'],
                     ['class' => 'btn btn-primary btn-xs', 'title' => Yii::t('app', 'Help'), 'target' => '_blank']
                 ),
                 'footer' => '<div class="pull-left">' . Html::a(FA::i(FA::_TIMES) . ' ' . <?= $generator->generateString('Cancel') ?>, Yii::$app->request->referrer, ['class' => 'btn btn-warning']) . '</div>
